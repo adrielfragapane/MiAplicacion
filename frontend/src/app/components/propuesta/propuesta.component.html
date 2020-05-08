@@ -3,8 +3,10 @@
 <div class="container">
     <a href="/usuarios" class="btn btn-info">ir a Usuarios</a>
     <div class="row">
-        <div class="col-sm-7">
-            <h2 class="display-2">Propuestas</h2>
+        <h2>Propuestas <button (click)="verTodas()" class="btn btn-info">Ver todas</button></h2>
+        <div class="col-sm-7"*ngIf="filtroUsuario">
+            <!--<h2>Propuestas<button (click)="toggleFiltroUsuario()" class="btn btn-info">Ver todas</button></h2>-->
+            
             <table class="table">
                 <thead>
                     <th>Nombre</th>
@@ -25,37 +27,55 @@
             <button (click)="nuevaPropuesta()" class="btn btn-info col-sm-12">Agregar Propuesta</button>
 
         </div>
+
+        <div class="col-sm-7" *ngIf="!filtroUsuario">
+            <h2 class="display-2">Propuestas</h2>
+            <table class="table">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Usuario</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let propuesta of propuestas">
+                        <td>{{propuesta.nombre}}</td>
+                        <td>{{propuesta.descripcion}}</td> 
+                        <td>{{propuesta.usuario.nombre}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
         <div class="col-sm-5">
-            <div class="car">
+            <div class="car" *ngIf="formPropuesta">
                 <div class="card-title">
                     <h2 class="display-2">Editar Propuesta</h2>
                 </div>
-                <div class="card-content">
-                    <div *ngIf="formPropuesta">      
-                        <form #PropuestaForm="ngForm">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" #name="ngModel"
-                                    [(ngModel)]="propuestaSeleccionada.nombre"
-                                    placeholder="Nombre de la propuesta">
-                                </div>
+                <div class="card-content">   
+                    <form #PropuestaForm="ngForm">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" #name="ngModel"
+                                [(ngModel)]="propuestaSeleccionada.nombre"
+                                placeholder="Nombre de la propuesta">
+                            </div>
 
+                            <div class="col-sm-12">
+                                <label for="descripcion">Descripción</label>
+                                <input type="text" class="form-control" name="descripcion" #name="ngModel"
+                                [(ngModel)]="propuestaSeleccionada.descripcion"
+                                placeholder="Descripción de la propuesta">
+                            </div>
+                            <div class="col-sm-12 text-center">
                                 <div class="col-sm-12">
-                                    <label for="descripcion">Descripción</label>
-                                    <input type="text" class="form-control" name="descripcion" #name="ngModel"
-                                    [(ngModel)]="propuestaSeleccionada.descripcion"
-                                    placeholder="Descripción de la propuesta">
+                                    <button *ngIf="editar" (click)="actualizarPropuesta()" class="btn btn-success col-sm-12">Actualizar</button>
+                                    <button *ngIf="!editar" (click)="guardarPropuesta()" class="btn btn-success col-sm-12">Guardar</button>
                                 </div>
-                                <div class="col-sm-12 text-center">
-                                    <div class="col-sm-12">
-                                        <button *ngIf="editar" (click)="actualizarPropuesta()" class="btn btn-success col-sm-12">Actualizar</button>
-                                        <button *ngIf="!editar" (click)="guardarPropuesta()" class="btn btn-success col-sm-12">Guardar</button>
-                                    </div>
-                                </div>
-                            </div> 
-                        </form>
-                   </div>
+                            </div>
+                        </div> 
+                    </form>
                 </div>
             </div>
         </div>

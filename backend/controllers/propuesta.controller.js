@@ -3,7 +3,7 @@ const Propuesta = require('../models/propuesta');
 const propuestaController = {};
 
 propuestaController.getPropuestas = async (req,res) => {
-    const propuestas = await Propuesta.find();
+    const propuestas = await Propuesta.find().populate('usuario');
     res.json(propuestas);
 };
 

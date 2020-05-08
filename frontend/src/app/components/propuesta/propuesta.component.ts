@@ -18,6 +18,8 @@ export class PropuestaComponent implements OnInit {
 
   formPropuesta: Boolean = false;
 
+  filtroUsuario: Boolean = true;
+
   editar: Boolean;
 
   propuestaSeleccionada: Propuesta;
@@ -27,8 +29,17 @@ export class PropuestaComponent implements OnInit {
   constructor(private propuestaService: PropuestaService, private router: Router) { }
 
   ngOnInit(): void {
-    this.idUsuarioSeleccionado = localStorage.getItem("idUsuarioSeleccionado");
-    this.getPropuestasUsuario(this.idUsuarioSeleccionado);
+
+    if(localStorage.getItem("idUsuarioSeleccionado")) {
+      this.filtroUsuario = true;
+      this.idUsuarioSeleccionado = localStorage.getItem("idUsuarioSeleccionado");
+      localStorage.removeItem("idUsuarioSeleccionado");
+      this.getPropuestasUsuario(this.idUsuarioSeleccionado);
+    }
+    else {
+      this.filtroUsuario = false;
+      this.getPropuestas();
+    }
   }
 
   getPropuestas() {
@@ -52,6 +63,15 @@ export class PropuestaComponent implements OnInit {
 
   verFormNuevaPropuesta() {
     this.formPropuesta = !this.formPropuesta;
+  }
+
+  toggleFiltroUsuario() {
+    this.filtroUsuario = !this.filtroUsuario;
+  }
+
+  verTodas() {
+    this.filtroUsuario = false;
+    this.getPropuestas();
   }
 
   nuevaPropuesta() {
