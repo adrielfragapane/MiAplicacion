@@ -26,7 +26,9 @@ export class PropuestaComponent implements OnInit {
 
   idUsuarioSeleccionado: String;
 
-  constructor(private propuestaService: PropuestaService, private router: Router) { }
+  constructor(private propuestaService: PropuestaService, 
+              private usuarioService: UsuarioService, 
+              private router: Router) { }
 
   ngOnInit(): void {
 
@@ -44,14 +46,14 @@ export class PropuestaComponent implements OnInit {
 
   getPropuestas() {
     this.propuestaService.getPropuestas()
-    .subscribe( res => {
+    .subscribe(res => {
       this.propuestas = res as Propuesta[]; 
     });
   }
 
   getPropuestasUsuario(idUsuario: String) {
     this.propuestaService.getPropuestasUsuario(idUsuario)
-    .subscribe( res => {
+    .subscribe(res => {
       this.propuestasUsuario = res as Propuesta[]; 
     });
   }
@@ -87,17 +89,17 @@ export class PropuestaComponent implements OnInit {
     this.propuestaSeleccionada = propuesta;
   }
 
-  actualizarPropuesta() {
-    this.propuestaService.putPropuesta(this.propuestaSeleccionada)
-    .subscribe( res => {
+  actualizarPropuesta(propuesta: Propuesta) {
+    this.propuestaService.putPropuesta(propuesta)
+    .subscribe(res => {
       console.log(res);
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);
       this.formPropuesta = false;
     });
   }
 
-  guardarPropuesta() {
-    this.propuestaService.postPropuesta(this.propuestaSeleccionada)
+  guardarPropuesta(propuesta: Propuesta) {
+    this.propuestaService.postPropuesta(propuesta)
     .subscribe(res => {
       console.log(res);
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);

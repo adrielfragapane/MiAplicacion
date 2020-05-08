@@ -48,8 +48,8 @@
                             </div>
                             <div class="col-sm-12 text-center">
                                 <div class="col-sm-12">
-                                    <button *ngIf="editar" (click)="actualizarUsuario()" class="btn btn-success col-sm-12">Actualizar</button>
-                                    <button *ngIf="!editar" (click)="guardarUsuario()" class="btn btn-success col-sm-12">Guardar</button>
+                                    <button *ngIf="editar" (click)="actualizarUsuario(usuarioSeleccionado)" class="btn btn-success col-sm-12">Actualizar</button>
+                                    <button *ngIf="!editar" (click)="guardarUsuario(usuarioSeleccionado)" class="btn btn-success col-sm-12">Guardar</button>
                                 </div>
                             </div>
                         </div> 

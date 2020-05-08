@@ -20,14 +20,12 @@ export class UsuarioComponent implements OnInit {
   constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
-
     this.getUsuarios();
   }
 
   getUsuarios() {
     this.usuarioService.getUsuarios()
     .subscribe(res => {
-      console.log(res);
       this.usuarios = res as Usuario[]; 
     });
   }
@@ -42,15 +40,12 @@ export class UsuarioComponent implements OnInit {
 
   verPropuestas(usuario: Usuario) {
     localStorage.setItem("idUsuarioSeleccionado",usuario._id.toString());
-    console.log(localStorage.getItem("idUsuarioSeleccionado"));
     this.router.navigate(['propuestas']);
   }
 
   verFormNuevoUusario() {
     this.formUsuario = !this.formUsuario;
   }
-
-
 
   nuevoUsuario() {
     this.editar = false;
@@ -64,8 +59,8 @@ export class UsuarioComponent implements OnInit {
     this.usuarioSeleccionado = usuario;
   }
 
-  actualizarUsuario() {
-    this.usuarioService.putUsuario(this.usuarioSeleccionado)
+  actualizarUsuario(usuario: Usuario) {
+    this.usuarioService.putUsuario(usuario)
     .subscribe( res => {
       console.log(res);
       this.getUsuarios();
@@ -73,8 +68,8 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  guardarUsuario() {
-    this.usuarioService.postUsuario(this.usuarioSeleccionado)
+  guardarUsuario(usuario: Usuario) {
+    this.usuarioService.postUsuario(usuario)
     .subscribe(res => {
       console.log(res);
       this.getUsuarios();

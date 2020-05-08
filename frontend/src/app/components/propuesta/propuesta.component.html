@@ -70,8 +70,8 @@
                             </div>
                             <div class="col-sm-12 text-center">
                                 <div class="col-sm-12">
-                                    <button *ngIf="editar" (click)="actualizarPropuesta()" class="btn btn-success col-sm-12">Actualizar</button>
-                                    <button *ngIf="!editar" (click)="guardarPropuesta()" class="btn btn-success col-sm-12">Guardar</button>
+                                    <button *ngIf="editar" (click)="actualizarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Actualizar</button>
+                                    <button *ngIf="!editar" (click)="guardarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Guardar</button>
                                 </div>
                             </div>
                         </div> 
