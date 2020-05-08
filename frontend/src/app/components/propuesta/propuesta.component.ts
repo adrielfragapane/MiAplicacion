@@ -92,6 +92,7 @@ export class PropuestaComponent implements OnInit {
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);
       this.formPropuesta = false;
     });
+    
   }
 
   guardarPropuesta(propuesta: Propuesta) {
@@ -101,6 +102,7 @@ export class PropuestaComponent implements OnInit {
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);
       this.formPropuesta = false;
     });
+    
   }
 
   eliminarPropuesta(propuesta: Propuesta) {
@@ -109,5 +111,14 @@ export class PropuestaComponent implements OnInit {
       console.log(res);
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);
     });
+  }
+
+  votar(propuesta: Propuesta) {
+    this.propuestaService.votarPropuesta(this.idUsuarioSeleccionado, propuesta._id)
+    .subscribe(res => {
+      console.log(res);
+      this.getPropuestas();
+    });
+  
   }
 }

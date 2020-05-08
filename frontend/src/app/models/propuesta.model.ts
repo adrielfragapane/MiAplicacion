@@ -4,9 +4,10 @@ export class Propuesta {
     nombre: String;
     descripcion: String;
     usuario: String;
+    votos: String[];
 
-    constructor(nombre='',descripcion='') {
-        this.nombre=nombre;
-        this.descripcion=descripcion;
+    constructor(nombre  = '', descripcion = '') {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
     }
 }

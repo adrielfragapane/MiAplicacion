@@ -28,12 +28,21 @@ propuestaController.editPropuesta = async (req,res) => {
 
 propuestaController.deletePropuesta = async (req,res) => {
     await Propuesta.findByIdAndRemove(req.params.id);
-    res.json({status: 'propuesta eliminada', _id: req.body._id });
+    await Usuario.updateMany({ propuestas: { $in: [req.params.id]}}, { $pull: { propuestas: req.params.id }});
+    await Usuario.updateMany({ propuestasVotadas: { $in: [req.params.id]}}, { $pull: { propuestasVotadas: req.params.id }});
+    res.json({status: 'propuesta eliminada', _id: req.params.id });
 };
 
 propuestaController.getPropuestasUsuario = async (req,res) => {
     const propuestas = await Propuesta.find().where({ usuario: req.params.usuario })
     res.json(propuestas);
+};
+
+propuestaController.votarPropuesta = async (req,res) => {
+    console.log(req.body);
+    await Propuesta.findOneAndUpdate({_id: req.body.propuesta}, { $push: { votos: req.body.usuario }});
+    await Usuario.findOneAndUpdate({_id: req.body.usuario}, { $push: { propuestasVotadas: req.body.propuesta }});
+    res.json({status: 'propuesta votada' });
 };
 
 module.exports = propuestaController;

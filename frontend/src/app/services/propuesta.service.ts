@@ -18,6 +18,7 @@ export class PropuestaService {
   }
 
   postPropuesta(propuesta: Propuesta) {
+    console.log(propuesta);
     return this.http.post<Propuesta>(this.URL_API, propuesta);
   }
 
@@ -26,10 +27,14 @@ export class PropuestaService {
   }
 
   deletePropuesta(_id: String) {
-    return this.http.delete<Propuesta>(this.URL_API + `${_id}`);
+    return this.http.delete(this.URL_API + `${_id}`);
   }
 
   getPropuestasUsuario(idUsuario: String ) {
     return this.http.get<Propuesta[]>(this.URL_API + `usuario/${idUsuario}`);
-}
+  }
+
+  votarPropuesta(idUsuario: String, idPropuesta: String) {
+    return this.http.put(this.URL_API + 'votar', { usuario: idUsuario, propuesta: idPropuesta });
+  }
 }

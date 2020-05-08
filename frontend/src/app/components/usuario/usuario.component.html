@@ -8,6 +8,7 @@
             <thead>
                 <th>Nombre</th>
                 <th>Apellido</th>
+                <th>Votaciones</th>
                 <th>Propuestas</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -16,7 +17,8 @@
                 <tr *ngFor="let usuario of usuarios">
                     <td>{{usuario.nombre}}</td>
                     <td>{{usuario.apellido}}</td> 
-                    <td><button (click)="verPropuestas(usuario)" class="btn btn-info">Propuestas</button></td>
+                    <td>{{usuario.propuestasVotadas.length}}</td>
+                    <td><button (click)="verPropuestas(usuario)" class="btn btn-info">{{usuario.propuestas.length}}</button></td>
                     <td><button (click)="editarUsuario(usuario)" class="btn btn-warning">Editar</button></td>
                     <td><button (click)="eliminarUsuario(usuario)" class="btn btn-danger">Eliminar</button></td>
                 </tr>

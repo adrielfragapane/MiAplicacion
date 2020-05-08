@@ -18,6 +18,7 @@
                         <thead>
                             <th>Nombre</th>
                             <th>Descripción</th>
+                            <th>Votos</th>
                             <th>Editar</th>
                             <th>Eliminar</th>
                         </thead>
@@ -25,6 +26,7 @@
                             <tr *ngFor="let propuesta of propuestasUsuario">
                                 <td>{{propuesta.nombre}}</td>
                                 <td>{{propuesta.descripcion}}</td> 
+                                <td>{{propuesta.votos.length}}</td> 
                                 <td><button (click)="editarPropuesta(propuesta)" class="btn btn-warning">Editar</button></td>
                                 <td><button (click)="eliminarPropuesta(propuesta)" class="btn btn-danger">Eliminar</button></td>
                             </tr>
@@ -41,12 +43,16 @@
                 <thead>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Usuario</th>
+                    <th>Votos</th>
+                    <th>Votar</th>
+                    <th>Usuario</th>                    
                 </thead>
                 <tbody>
                     <tr *ngFor="let propuesta of propuestas">
                         <td>{{propuesta.nombre}}</td>
                         <td>{{propuesta.descripcion}}</td> 
+                        <td>{{propuesta.votos.length}}</td> 
+                        <td><button (click)="votar(propuesta)" class="btn btn-success">Votar</button></td>
                         <td><button class="btn btn-info">{{propuesta.usuario.nombre}}</button></td>
                     </tr>
                 </tbody>

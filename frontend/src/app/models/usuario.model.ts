@@ -4,9 +4,10 @@ export class Usuario {
     nombre: String;
     apellido: String;
     propuestas: String[];
+    propuestasVotadas: String[];
 
-    constructor(nombre='',apellido='') {
-        this.nombre=nombre;
-        this.apellido=apellido;
+    constructor(nombre = '', apellido = '') {
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 }

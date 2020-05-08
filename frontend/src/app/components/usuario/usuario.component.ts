@@ -65,8 +65,9 @@ export class UsuarioComponent implements OnInit {
     .subscribe( res => {
       console.log(res);
       this.getUsuarios();
+      this.formUsuario = false;
     });
-    this.formUsuario = false;
+    
   }
 
   guardarUsuario(usuario: Usuario) {
