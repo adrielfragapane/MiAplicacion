@@ -1,6 +1,7 @@
 <p>propuesta works!</p>
 
 <div class="container">
+    <a href="/usuarios" class="btn btn-info">ir a Usuarios</a>
     <div class="row">
         <div class="col-sm-7">
             <h2 class="display-2">Propuestas</h2>
@@ -8,18 +9,15 @@
                 <thead>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Acciones</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
                 </thead>
                 <tbody>
                     <tr *ngFor="let propuesta of propuestasUsuario">
                         <td>{{propuesta.nombre}}</td>
                         <td>{{propuesta.descripcion}}</td> 
-                        <td>
-                            <button (click)="editarPropuesta(propuesta)" class="btn btn-warning">Editar</button>
-                        </td>
-                        <td>
-                            <button (click)="eliminarPropuesta(propuesta)" class="btn btn-danger">Eliminar</button>
-                        </td>
+                        <td><button (click)="editarPropuesta(propuesta)" class="btn btn-warning">Editar</button></td>
+                        <td><button (click)="eliminarPropuesta(propuesta)" class="btn btn-danger">Eliminar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -61,15 +59,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-            
-                
-
-    
-
-    
-
+    </div>  
 </div>

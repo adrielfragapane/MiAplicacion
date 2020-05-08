@@ -1,5 +1,3 @@
-import { Propuesta } from './propuesta.model';
-
 export class Usuario {
 
     _id: String;

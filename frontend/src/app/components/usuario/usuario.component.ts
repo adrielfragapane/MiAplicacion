@@ -14,6 +14,9 @@ export class UsuarioComponent implements OnInit {
 
   usuarioSeleccionado: Usuario;
 
+  formUsuario: Boolean = false;
+  editar: Boolean;
+
   constructor(private usuarioService: UsuarioService, private router: Router) { }
 
   ngOnInit(): void {
@@ -41,6 +44,49 @@ export class UsuarioComponent implements OnInit {
     localStorage.setItem("idUsuarioSeleccionado",usuario._id.toString());
     console.log(localStorage.getItem("idUsuarioSeleccionado"));
     this.router.navigate(['propuestas']);
+  }
+
+  verFormNuevoUusario() {
+    this.formUsuario = !this.formUsuario;
+  }
+
+
+
+  nuevoUsuario() {
+    this.editar = false;
+    this.formUsuario = true;
+    this.usuarioSeleccionado = new Usuario();
+  }
+
+  editarUsuario(usuario: Usuario) {
+    this.editar = true;
+    this.formUsuario = true;
+    this.usuarioSeleccionado = usuario;
+  }
+
+  actualizarUsuario() {
+    this.usuarioService.putUsuario(this.usuarioSeleccionado)
+    .subscribe( res => {
+      console.log(res);
+      this.getUsuarios();
+      this.formUsuario = false;
+    });
+  }
+
+  guardarUsuario() {
+    this.usuarioService.postUsuario(this.usuarioSeleccionado)
+    .subscribe(res => {
+      console.log(res);
+      this.getUsuarios();
+    });
+  }
+
+  eliminarUsuario(usuario: Usuario) {
+    this.usuarioService.deleteUsuario(usuario._id)
+    .subscribe(res => {
+      console.log(res);
+      this.getUsuarios();
+    });
   }
 
 }

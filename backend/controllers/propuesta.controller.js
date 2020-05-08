@@ -32,4 +32,5 @@ propuestaController.getPropuestasUsuario = async (req,res) => {
     const propuestas = await Propuesta.find().where({ usuario: req.params.usuario })
     res.json(propuestas);
 };
+
 module.exports = propuestaController;

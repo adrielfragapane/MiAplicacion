@@ -1,28 +1,61 @@
 <p>usuario works!</p>
 
-
 <div class="container">
-  
-    <table class="table">
-        <thead>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Propuestas </th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let usuario of usuarios" class="text-center">
-                <td>{{usuario._id}}</td>
-                <td>{{usuario.nombre}}</td>
-                <td>{{usuario.apellido}}</td> 
-                <td>
-                    <button (click)="verPropuestas(usuario)" class="btn btn-info">Propuestas</button>
-                </td>   
-            </tr>
-        </tbody>
-    </table>
+<div class="row">
+    <div class="col-sm-7">
+        <h2 class="display-2">Usuarios</h2>
+        <table class="table">
+            <thead>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Propuestas</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>{{usuario.nombre}}</td>
+                    <td>{{usuario.apellido}}</td> 
+                    <td><button (click)="verPropuestas(usuario)" class="btn btn-info">Propuestas</button></td>
+                    <td><button (click)="editarUsuario(usuario)" class="btn btn-warning">Editar</button></td>
+                    <td><button (click)="eliminarUsuario(usuario)" class="btn btn-danger">Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>  
+        <button (click)="nuevoUsuario()" class="btn btn-info col-sm-12">Agregar Usuario</button>
+    </div>
+    <div class="col-sm-5">
+        <div class="car">
+            <div class="card-title">
+                <h2 class="display-2">Editar Usuario</h2>
+            </div>
+            <div class="card-content">
+                <div *ngIf="formUsuario">      
+                    <form #UsuarioForm="ngForm">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" #name="ngModel"
+                                [(ngModel)]="usuarioSeleccionado.nombre"
+                                placeholder="Nombre del usuario">
+                            </div>
 
-
-    <button (click)="getUsuarios()" class="btn btn-info">Mostrar usuarios</button>
-
+                            <div class="col-sm-12">
+                                <label for="descripcion">Descripción</label>
+                                <input type="text" class="form-control" name="apellido" #name="ngModel"
+                                [(ngModel)]="usuarioSeleccionado.apellido"
+                                placeholder="Apellido del usuario">
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <div class="col-sm-12">
+                                    <button *ngIf="editar" (click)="actualizarUsuario()" class="btn btn-success col-sm-12">Actualizar</button>
+                                    <button *ngIf="!editar" (click)="guardarUsuario()" class="btn btn-success col-sm-12">Guardar</button>
+                                </div>
+                            </div>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

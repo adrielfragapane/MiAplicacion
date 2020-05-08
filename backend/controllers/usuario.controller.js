@@ -8,11 +8,7 @@ usuarioController.getUsuarios = async (req,res) => {
 };
 
 usuarioController.createUsuario= async (req,res) => {
-    console.log(req.body);
-    const usuario = new Usuario({
-        nombre: req.body.nombre,
-        apellido: req.body.apellido,
-    });
+    const usuario = new Usuario(req.body);
     await usuario.save();
     res.json({status: 'Usuario guardado'});
 };
@@ -23,9 +19,12 @@ usuarioController.getUsuario= async (req,res) => {
 };
 
 usuarioController.editUsuario= async (req,res) => {
+    await Usuario.findOneAndUpdate({_id: req.params.id}, req.body);
+    res.json({status: 'Usuario actualizado'});
+/*
     const { id } = req.params;
     await Usuario.findOneAndUpdate(id, {$set: req.body});
-    res.json({status: 'Usuario actualizado ' + id + ' ' + ' ' + req.body._id});
+    res.json({status: 'Usuario actualizado ' + id + ' ' + ' ' + req.body._id});*/
 };
 
 usuarioController.deleteUsuario= async (req,res) => {

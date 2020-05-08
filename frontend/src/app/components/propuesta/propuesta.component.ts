@@ -12,26 +12,21 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class PropuestaComponent implements OnInit {
 
-
-
   propuestas: Propuesta[];
 
   propuestasUsuario: Propuesta[];
 
   formPropuesta: Boolean = false;
+
   editar: Boolean;
 
   propuestaSeleccionada: Propuesta;
 
   idUsuarioSeleccionado: String;
 
-  constructor(private propuestaService: PropuestaService, 
-              private router: Router) {
-    this.propuestaSeleccionada = new Propuesta();
-  }
+  constructor(private propuestaService: PropuestaService, private router: Router) { }
 
   ngOnInit(): void {
-    //this.getPropuestas();
     this.idUsuarioSeleccionado = localStorage.getItem("idUsuarioSeleccionado");
     this.getPropuestasUsuario(this.idUsuarioSeleccionado);
   }
@@ -39,7 +34,6 @@ export class PropuestaComponent implements OnInit {
   getPropuestas() {
     this.propuestaService.getPropuestas()
     .subscribe( res => {
-      //console.log(res);
       this.propuestas = res as Propuesta[]; 
     });
   }
@@ -47,7 +41,6 @@ export class PropuestaComponent implements OnInit {
   getPropuestasUsuario(idUsuario: String) {
     this.propuestaService.getPropuestasUsuario(idUsuario)
     .subscribe( res => {
-      //console.log(res);
       this.propuestasUsuario = res as Propuesta[]; 
     });
   }
@@ -59,15 +52,6 @@ export class PropuestaComponent implements OnInit {
 
   verFormNuevaPropuesta() {
     this.formPropuesta = !this.formPropuesta;
-  }
-
-  guardarPropuesta() {
-    //console.log("Se guarda...");
-    this.propuestaService.postPropuesta(this.propuestaSeleccionada)
-    .subscribe(res => {
-      console.log(res);
-      this.getPropuestasUsuario(this.idUsuarioSeleccionado);
-    });
   }
 
   nuevaPropuesta() {
@@ -84,9 +68,21 @@ export class PropuestaComponent implements OnInit {
   }
 
   actualizarPropuesta() {
-    //console.log(this.propuestaSeleccionada);
-    this.propuestaService.putPropuesta(this.propuestaSeleccionada);
-    this.getPropuestasUsuario(this.idUsuarioSeleccionado);
+    this.propuestaService.putPropuesta(this.propuestaSeleccionada)
+    .subscribe( res => {
+      console.log(res);
+      this.getPropuestasUsuario(this.idUsuarioSeleccionado);
+      this.formPropuesta = false;
+    });
+  }
+
+  guardarPropuesta() {
+    this.propuestaService.postPropuesta(this.propuestaSeleccionada)
+    .subscribe(res => {
+      console.log(res);
+      this.getPropuestasUsuario(this.idUsuarioSeleccionado);
+      this.formPropuesta = false;
+    });
   }
 
   eliminarPropuesta(propuesta: Propuesta) {
@@ -94,27 +90,6 @@ export class PropuestaComponent implements OnInit {
     .subscribe(res => {
       console.log(res);
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);
-    })
+    });
   }
-
-  /*
-  addEmployee(form: NgForm) {
-    if(form.value._id) {
-      this.employeeService.putEmployee(form.value)
-      .subscribe(res => {
-        this.resetForm(form);
-        M.toast({html: 'Empleado actualizado exitosamente'});
-        this.getEmployees();
-      })
-    } else {
-      this.employeeService.postEmployee(form.value)
-      .subscribe( res => {
-        this.resetForm(form);
-        M.toast({html: 'Empleado guardado exitosamente'});
-        this.getEmployees();
-      });
-    }
-  }
-  */
-
 }
