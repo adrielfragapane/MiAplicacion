@@ -1,0 +1,28 @@
+<p>usuario works!</p>
+
+
+<div class="container">
+  
+    <table class="table">
+        <thead>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Propuestas </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let usuario of usuarios" class="text-center">
+                <td>{{usuario._id}}</td>
+                <td>{{usuario.nombre}}</td>
+                <td>{{usuario.apellido}}</td> 
+                <td>
+                    <button (click)="verPropuestas(usuario)" class="btn btn-info">Propuestas</button>
+                </td>   
+            </tr>
+        </tbody>
+    </table>
+
+
+    <button (click)="getUsuarios()" class="btn btn-info">Mostrar usuarios</button>
+
+</div>
