@@ -24,8 +24,8 @@
         </table>  
         <button (click)="nuevoUsuario()" class="btn btn-info col-sm-12">Agregar Usuario</button>
     </div>
-    <div class="col-sm-5">
-        <div class="car">
+    <div class="col-sm-5" *ngIf="formUsuario">
+        <div class="card">
             <div class="card-title">
                 <h2 class="display-2">Editar Usuario</h2>
             </div>
@@ -46,7 +46,7 @@
                                 [(ngModel)]="usuarioSeleccionado.apellido"
                                 placeholder="Apellido del usuario">
                             </div>
-                            <div class="col-sm-12 text-center">
+                            <div class="col-sm-12 text-center" style="margin-top: 20px;">
                                 <div class="col-sm-12">
                                     <button *ngIf="editar" (click)="actualizarUsuario(usuarioSeleccionado)" class="btn btn-success col-sm-12">Actualizar</button>
                                     <button *ngIf="!editar" (click)="guardarUsuario(usuarioSeleccionado)" class="btn btn-success col-sm-12">Guardar</button>

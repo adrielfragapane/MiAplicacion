@@ -15,6 +15,7 @@ export class UsuarioComponent implements OnInit {
   usuarioSeleccionado: Usuario;
 
   formUsuario: Boolean = false;
+
   editar: Boolean;
 
   constructor(private usuarioService: UsuarioService, private router: Router) { }
@@ -64,8 +65,8 @@ export class UsuarioComponent implements OnInit {
     .subscribe( res => {
       console.log(res);
       this.getUsuarios();
-      this.formUsuario = false;
     });
+    this.formUsuario = false;
   }
 
   guardarUsuario(usuario: Usuario) {
@@ -73,6 +74,7 @@ export class UsuarioComponent implements OnInit {
     .subscribe(res => {
       console.log(res);
       this.getUsuarios();
+      this.formUsuario = false;
     });
   }
 

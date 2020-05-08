@@ -5,6 +5,7 @@ import { PropuestaComponent } from './components/propuesta/propuesta.component';
 
 
 const routes: Routes = [
+  {path: '', component: UsuarioComponent},
   {path: 'usuarios', component: UsuarioComponent},
   {path: 'propuestas', component: PropuestaComponent}
 ];

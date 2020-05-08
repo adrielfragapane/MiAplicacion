@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from 'src/app/models/usuario.model';
 import { Propuesta } from 'src/app/models/propuesta.model';
 import { PropuestaService } from 'src/app/services/propuesta.service';
 import { Router } from '@angular/router';
-import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-propuesta',
@@ -26,9 +24,7 @@ export class PropuestaComponent implements OnInit {
 
   idUsuarioSeleccionado: String;
 
-  constructor(private propuestaService: PropuestaService, 
-              private usuarioService: UsuarioService, 
-              private router: Router) { }
+  constructor(private propuestaService: PropuestaService, private router: Router) { }
 
   ngOnInit(): void {
 
