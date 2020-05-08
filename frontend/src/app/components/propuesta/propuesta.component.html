@@ -1,17 +1,14 @@
-<p>propuesta works!</p>
-
 <div class="container">
     <a href="/usuarios" class="btn btn-info">ir a Usuarios</a>
     
-    <h2>Propuestas 
-        <button *ngIf="filtroUsuario" (click)="verTodas()" class="btn btn-info">Ver todas</button>
-    </h2>
     <div class="row">
         <div class="col-sm-7" *ngIf="filtroUsuario">
             <!--<h2>Propuestas<button (click)="toggleFiltroUsuario()" class="btn btn-info">Ver todas</button></h2>-->
             <div class="card">
                 <div class="card-title">
-                    <h2 class="display-2">Propuestas</h2>
+                    <h2>Propuestas de {{propuestasUsuario[0].nombre}}
+                        <button (click)="verTodas()" class="btn btn-info">Ver todas</button>
+                    </h2>
                 </div>
                 <div class="card-content">  
                     <table class="table">
@@ -62,7 +59,7 @@
         <div class="col-sm-5" *ngIf="formPropuesta">
             <div class="card">
                 <div class="card-title">
-                    <h2 class="display-2">Editar Propuesta</h2>
+                    <h2>Propuestas </h2>
                 </div>
                 <div class="card-content">   
                     <form #PropuestaForm="ngForm">
