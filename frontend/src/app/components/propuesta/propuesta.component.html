@@ -26,6 +26,7 @@
                                 <td>{{propuesta.votos.length}}</td> 
                                 <td><button (click)="editarPropuesta(propuesta)" class="btn btn-warning">Editar</button></td>
                                 <td><button (click)="eliminarPropuesta(propuesta)" class="btn btn-danger">Eliminar</button></td>
+                                <td><img class="img-responsive" src='{{URL}}' alt="Img"></td>
                             </tr>
                         </tbody>
                     </table>                
@@ -77,6 +78,18 @@
                                 [(ngModel)]="propuestaSeleccionada.descripcion"
                                 placeholder="Descripción de la propuesta">
                             </div>
+
+                            <div class="col-sm-12">
+                                <label for="imagen">Imagen</label>
+                                <input type="file" (change)="setImagenes($event)" class="form-control" name="imagen">
+                            
+                                <button (click)="onUpload()" class="btn btn-success col-sm-12">Subir Imagen</button>
+                            </div>
+
+
+                            
+                      
+
                             <div class="col-sm-12 text-center" style="margin-top: 20px;">                                
                                 <div class="col-sm-12">
                                     <button *ngIf="editar" (click)="actualizarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Actualizar</button>

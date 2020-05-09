@@ -24,6 +24,10 @@ export class PropuestaComponent implements OnInit {
 
   idUsuarioSeleccionado: String;
 
+  imagenSeleccionada: File = null;
+
+  URL: String = "http://localhost:3000/public/imagen.jpg";
+
   constructor(private propuestaService: PropuestaService, private router: Router) { }
 
   ngOnInit(): void {
@@ -119,6 +123,21 @@ export class PropuestaComponent implements OnInit {
       console.log(res);
       this.getPropuestas();
     });
-  
+  }
+
+  setImagenes(event) {
+    
+    this.imagenSeleccionada = <File> event.target.files[0];
+    console.log(this.imagenSeleccionada);
+  }
+
+  onUpload() {
+    const fd = new FormData();
+    fd.append('image', this.imagenSeleccionada, this.imagenSeleccionada.name);
+    console.log(fd);
+    this.propuestaService.setImagenPropuesta(fd)
+    .subscribe(res => {
+      console.log(res);
+    });
   }
 }

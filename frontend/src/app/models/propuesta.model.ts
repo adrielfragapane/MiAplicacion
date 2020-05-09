@@ -5,6 +5,7 @@ export class Propuesta {
     descripcion: String;
     usuario: String;
     votos: String[];
+    imagenes: String[];
 
     constructor(nombre  = '', descripcion = '') {
         this.nombre = nombre;

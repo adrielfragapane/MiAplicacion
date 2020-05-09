@@ -9,11 +9,10 @@ propuestaController.getPropuestas = async (req,res) => {
 };
 
 propuestaController.createPropuesta = async (req,res) => { 
-    const propuesta = new Propuesta(req.body);  
+    const propuesta = new Propuesta(req.body);
     await propuesta.save();
     await Usuario.findOneAndUpdate({_id: req.body.usuario }, { $push: { propuestas: propuesta._id }});
     res.json({status: 'propuesta guardada y asignada', _id: propuesta._id });
-    
 };
 
 propuestaController.getPropuesta = async (req,res) => {
@@ -44,5 +43,16 @@ propuestaController.votarPropuesta = async (req,res) => {
     await Usuario.findOneAndUpdate({_id: req.body.usuario}, { $push: { propuestasVotadas: req.body.propuesta }});
     res.json({status: 'propuesta votada' });
 };
+
+propuestaController.subirImagen = (req,res) => {
+    console.log("llego");
+    let EDFile = req.files.image;
+    console.log(req.files);
+    EDFile.mv(`./storage/imgs/${EDFile.name}`,err => {
+        if(err) res.status(500).send({ message : err })
+
+        res.status(200).send({ message : 'File upload' });
+    })
+}
 
 module.exports = propuestaController;
