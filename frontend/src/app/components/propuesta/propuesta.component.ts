@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Propuesta } from 'src/app/models/propuesta.model';
 import { PropuestaService } from 'src/app/services/propuesta.service';
 import { Router } from '@angular/router';
+import { range } from 'rxjs';
 
 @Component({
   selector: 'app-propuesta',
@@ -24,7 +25,7 @@ export class PropuestaComponent implements OnInit {
 
   idUsuarioSeleccionado: String;
 
-  imagenSeleccionada: File = null;
+  imagenesSeleccionadas: File[];
 
   URL: String = "http://localhost:3000/public/imagen.jpg";
 
@@ -127,15 +128,16 @@ export class PropuestaComponent implements OnInit {
 
   setImagenes(event) {
     
-    this.imagenSeleccionada = <File> event.target.files[0];
-    console.log(this.imagenSeleccionada);
+    this.imagenesSeleccionadas = event.target.files;
+    console.log(this.imagenesSeleccionadas);
   }
 
-  onUpload() {
+  subirImagenes() {
     const fd = new FormData();
-    fd.append('image', this.imagenSeleccionada, this.imagenSeleccionada.name);
-    console.log(fd);
-    this.propuestaService.setImagenPropuesta(fd)
+    for(const i of Array(this.imagenesSeleccionadas.length).keys()) {
+      fd.append(`imagen_${i}`, this.imagenesSeleccionadas[i], this.imagenesSeleccionadas[i].name);
+    }
+    this.propuestaService.setImagenesPropuesta(fd)
     .subscribe(res => {
       console.log(res);
     });

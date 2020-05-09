@@ -38,7 +38,7 @@ export class PropuestaService {
     return this.http.put(this.URL_API + 'votar', { usuario: idUsuario, propuesta: idPropuesta });
   }
 
-  setImagenPropuesta(fd: FormData) {
+  setImagenesPropuesta(fd: FormData) {
     console.log(fd);
     console.log(this.URL_API + 'upload');
     return this.http.post(this.URL_API + 'upload', fd);

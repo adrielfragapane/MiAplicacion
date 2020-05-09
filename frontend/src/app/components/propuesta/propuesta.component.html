@@ -81,9 +81,9 @@
 
                             <div class="col-sm-12">
                                 <label for="imagen">Imagen</label>
-                                <input type="file" (change)="setImagenes($event)" class="form-control" name="imagen">
+                                <input type="file" ng-file-model="files" multiple (change)="setImagenes($event)" class="form-control" name="imagen"/>
                             
-                                <button (click)="onUpload()" class="btn btn-success col-sm-12">Subir Imagen</button>
+                                <button (click)="subirImagenes()" class="btn btn-success col-sm-12">Subir Imagen</button>
                             </div>
 
 

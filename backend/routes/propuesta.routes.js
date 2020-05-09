@@ -9,7 +9,7 @@ const propuesta = require('../controllers/propuesta.controller');
 //Agregar un voto a una propuesta
 
 routerPropuesta.put('/votar',propuesta.votarPropuesta);
-routerPropuesta.post('/upload',propuesta.subirImagen);
+routerPropuesta.post('/upload',propuesta.subirImagenes);
 //Operaciones básicas
 
 routerPropuesta.get('/',propuesta.getPropuestas);

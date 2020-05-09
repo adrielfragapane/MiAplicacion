@@ -38,21 +38,17 @@ propuestaController.getPropuestasUsuario = async (req,res) => {
 };
 
 propuestaController.votarPropuesta = async (req,res) => {
-    console.log(req.body);
     await Propuesta.findOneAndUpdate({_id: req.body.propuesta}, { $push: { votos: req.body.usuario }});
     await Usuario.findOneAndUpdate({_id: req.body.usuario}, { $push: { propuestasVotadas: req.body.propuesta }});
     res.json({status: 'propuesta votada' });
 };
 
-propuestaController.subirImagen = (req,res) => {
-    console.log("llego");
-    let EDFile = req.files.image;
-    console.log(req.files);
-    EDFile.mv(`./storage/imgs/${EDFile.name}`,err => {
-        if(err) res.status(500).send({ message : err })
-
-        res.status(200).send({ message : 'File upload' });
-    })
+propuestaController.subirImagenes = async (req,res) => {
+    for(file in req.files) {
+        const imagen = req.files[file];
+        await imagen.mv(`./storage/imgs/${imagen.name}`);
+    }
+    res.json({status: 'imagen subida' });
 }
 
 module.exports = propuestaController;
