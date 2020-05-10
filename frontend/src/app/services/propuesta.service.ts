@@ -18,7 +18,6 @@ export class PropuestaService {
   }
 
   postPropuesta(propuesta: Propuesta) {
-    console.log(propuesta);
     return this.http.post<Propuesta>(this.URL_API, propuesta);
   }
 
@@ -39,8 +38,18 @@ export class PropuestaService {
   }
 
   setImagenesPropuesta(fd: FormData) {
-    console.log(fd);
-    console.log(this.URL_API + 'upload');
     return this.http.post(this.URL_API + 'upload', fd);
   }
+
+  postPutPropuesta(propuesta: Propuesta,editar: Boolean) {
+    console.log(propuesta);
+    if(editar) {
+      return this.http.put<Propuesta>(this.URL_API + `${propuesta._id}`, propuesta);
+    }
+    else {
+      return this.http.post<Propuesta>(this.URL_API, propuesta);
+    }
+    
+  }
+
 }

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Propuesta } from 'src/app/models/propuesta.model';
 import { PropuestaService } from 'src/app/services/propuesta.service';
 import { Router } from '@angular/router';
-import { range } from 'rxjs';
 
 @Component({
   selector: 'app-propuesta',
@@ -27,7 +26,13 @@ export class PropuestaComponent implements OnInit {
 
   imagenesSeleccionadas: File[];
 
-  URL: String = "http://localhost:3000/public/imagen.jpg";
+  formData: FormData;
+
+  URL_D : String = "http://localhost:3000/dinamico/";
+  URL_E : String = "http://localhost:3000/estatico/";
+
+  URL_D_IMGS: String = this.URL_D + "imgs/"; 
+  URL_E_IMGS: String = this.URL_E + "imgs/";
 
   constructor(private propuestaService: PropuestaService, private router: Router) { }
 
@@ -90,24 +95,48 @@ export class PropuestaComponent implements OnInit {
     this.propuestaSeleccionada = propuesta;
   }
 
+  /*
   actualizarPropuesta(propuesta: Propuesta) {
+    
+    if(this.imagenesSeleccionadas) {
+      this.formData = new FormData();
+      Array.from(this.imagenesSeleccionadas).forEach( imagen => {
+        propuesta.imagenes.push(imagen.name);
+        this.formData.append('imagen', imagen, imagen.name);
+      });
+    }
+
     this.propuestaService.putPropuesta(propuesta)
     .subscribe(res => {
       console.log(res);
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);
-      this.formPropuesta = false;
     });
     
-  }
-
-  guardarPropuesta(propuesta: Propuesta) {
-    this.propuestaService.postPropuesta(propuesta)
+    this.propuestaService.setImagenesPropuesta(this.formData)
     .subscribe(res => {
       console.log(res);
       this.getPropuestasUsuario(this.idUsuarioSeleccionado);
       this.formPropuesta = false;
     });
-    
+  }*/
+
+  guardarPropuesta(propuesta: Propuesta) {
+    if(this.imagenesSeleccionadas) {
+      this.formData = new FormData();
+      Array.from(this.imagenesSeleccionadas).forEach( imagen => {
+        propuesta.imagenes.push(imagen.name);
+        this.formData.append('imagen', imagen, imagen.name);
+      });
+    }
+
+    this.propuestaService.setImagenesPropuesta(this.formData)
+    .subscribe(res => {
+      this.propuestaService.postPutPropuesta(propuesta,this.editar)
+      .subscribe(res => {
+        this.formPropuesta = false;
+        this.getPropuestasUsuario(this.idUsuarioSeleccionado);
+      });
+    });
   }
 
   eliminarPropuesta(propuesta: Propuesta) {
@@ -127,19 +156,6 @@ export class PropuestaComponent implements OnInit {
   }
 
   setImagenes(event) {
-    
     this.imagenesSeleccionadas = event.target.files;
-    console.log(this.imagenesSeleccionadas);
-  }
-
-  subirImagenes() {
-    const fd = new FormData();
-    for(const i of Array(this.imagenesSeleccionadas.length).keys()) {
-      fd.append(`imagen_${i}`, this.imagenesSeleccionadas[i], this.imagenesSeleccionadas[i].name);
-    }
-    this.propuestaService.setImagenesPropuesta(fd)
-    .subscribe(res => {
-      console.log(res);
-    });
   }
 }

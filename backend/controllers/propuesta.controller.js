@@ -43,12 +43,35 @@ propuestaController.votarPropuesta = async (req,res) => {
     res.json({status: 'propuesta votada' });
 };
 
+
 propuestaController.subirImagenes = async (req,res) => {
+    Array.from(req.files.imagen).forEach( async imagen => {
+        await imagen.mv(`./storage/dinamico/imgs/${imagen.name}`);
+    });
+    res.json({status: 'imagen/es subida/s' });
+}
+
+/*
+propuestaController.subirImagenes = async (req,res) => {
+ 
+    console.log(req.files);
+
+
+    //datos = JSON.parse(req.body.datos);
+
+    //console.log(datos.propuesta);
+    //console.log(datos.imagenes);
+    var i=0;
     for(file in req.files) {
         const imagen = req.files[file];
         await imagen.mv(`./storage/imgs/${imagen.name}`);
+        console.log(datos.propuesta);
+        console.log(datos.imagenes[i]);
+        await Propuesta.findOneAndUpdate({_id: datos.propuesta}, { $push: { imagenes: datos.imagenes[i] }});
+        i++;
     }
+
     res.json({status: 'imagen subida' });
-}
+}*/
 
 module.exports = propuestaController;

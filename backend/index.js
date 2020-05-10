@@ -20,7 +20,8 @@ app.use(express.json()); // permite que el servidor entienda objetos json
 app.use(cors({origin: 'http://localhost:4200'}));
 
 //Se indica que el usuario va a ver la ruta "/public" pero en el servidor representa "/storage/imgs"
-app.use('/public', express.static(`${__dirname}/storage/imgs`));
+app.use('/dinamico', express.static(`${__dirname}/storage/dinamico`));
+app.use('/estatico', express.static(`${__dirname}/storage/estatico`));
 
 //Routes
 app.use('/usuarios',require('./routes/usuario.routes'));

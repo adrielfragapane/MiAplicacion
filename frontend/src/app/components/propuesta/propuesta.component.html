@@ -6,7 +6,7 @@
             <!--<h2>Propuestas<button (click)="toggleFiltroUsuario()" class="btn btn-info">Ver todas</button></h2>-->
             <div class="card">
                 <div class="card-title">
-                    <h2>Propuestas de {{propuestasUsuario[0].nombre}}
+                    <h2>Propuestas
                         <button (click)="verTodas()" class="btn btn-info">Ver todas</button>
                     </h2>
                 </div>
@@ -26,7 +26,17 @@
                                 <td>{{propuesta.votos.length}}</td> 
                                 <td><button (click)="editarPropuesta(propuesta)" class="btn btn-warning">Editar</button></td>
                                 <td><button (click)="eliminarPropuesta(propuesta)" class="btn btn-danger">Eliminar</button></td>
-                                <td><img class="img-responsive" src='{{URL}}' alt="Img"></td>
+                                <!--<td><img class="img-responsive" src='{{URL}}' alt="Img"></td>-->
+                                <!--<td><img class="img-responsive" src='{{URL + propuesta.imagenes[0]}}' alt="Img"></td>-->
+                                <td>
+                                    <div class="col-sm-12 row card-group">
+                                        <div class="col-sm-6 col-md-6"  *ngFor="let imagen of propuesta.imagenes">
+                                            <div class="card">
+                                                <img class="card-img img-responsive" src='{{URL_D_IMGS + imagen}}' alt="Card image">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>                
@@ -82,20 +92,38 @@
                             <div class="col-sm-12">
                                 <label for="imagen">Imagen</label>
                                 <input type="file" ng-file-model="files" multiple (change)="setImagenes($event)" class="form-control" name="imagen"/>
-                            
-                                <button (click)="subirImagenes()" class="btn btn-success col-sm-12">Subir Imagen</button>
                             </div>
 
-
-                            
-                      
-
+                            <div class="col-sm-12 row card-group">
+                                <div class="col-sm-4"  *ngFor="let imagen of propuestaSeleccionada.imagenes" style="height: width;">
+                                    <div class="card">
+                                        <img class="card-img img-responsive" src='{{URL_D_IMGS + imagen}}' alt="Card image">
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="col-sm-4"  *ngFor="let imagen of imagenesSeleccionadas" style="height: width;">
+                                    <div class="card">
+                                        <img class="card-img img-responsive" src='{{URL_E_IMGS + "foto-agregada.jpg"}}' alt="Card image">
+                                    </div>
+                                </div>-->
+                            </div>
                             <div class="col-sm-12 text-center" style="margin-top: 20px;">                                
                                 <div class="col-sm-12">
-                                    <button *ngIf="editar" (click)="actualizarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Actualizar</button>
-                                    <button *ngIf="!editar" (click)="guardarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Guardar</button>
+                                    <button (click)="guardarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">
+                                        {{editar ? 'Actualizar' : 'Guardar'}}
+                                    </button>
+                                    <!--<button *ngIf="!editar" (click)="guardarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Guardar</button>-->
                                 </div>
                             </div>
+                            <!--
+                            <div class="col-sm-12 text-center" style="margin-top: 20px;">                                
+                                <div class="col-sm-12">
+                                    <button *ngIf="editar" (click)="actualizarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Actualizar
+                                        <h2></h2>
+                                    </button>
+                                    <button *ngIf="!editar" (click)="guardarPropuesta(propuestaSeleccionada)" class="btn btn-success col-sm-12">Guardar</button>
+                                </div>
+                            </div>-->
                         </div> 
                     </form>
                 </div>

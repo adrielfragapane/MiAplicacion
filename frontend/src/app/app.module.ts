@@ -7,14 +7,12 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { PropuestaComponent } from './components/propuesta/propuesta.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsuarioComponent,
-    PropuestaComponent,
-    FileUploadComponent
+    PropuestaComponent
   ],
   imports: [
     BrowserModule,
