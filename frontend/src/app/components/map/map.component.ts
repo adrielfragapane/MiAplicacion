@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps'
+import { conditionallyCreateMapObjectLiteral } from '@angular/compiler/src/render3/view/util';
 
 @Component({
   selector: 'app-map',
@@ -18,6 +19,9 @@ export class MapComponent implements AfterViewInit {
 
   markers = [];
   infoWindows =[];
+
+  markers2 = [];
+  infoWindows2 =[];
 
   /*
   markers = [
@@ -39,6 +43,11 @@ export class MapComponent implements AfterViewInit {
 
   mapOptions: google.maps.MapOptions = {
     center: this.coordinates,
+    zoomControl: false,
+    scrollwheel: true,
+    disableDoubleClickZoom: true,
+    maxZoom: 15,
+    minZoom: 8,
     zoom: 8
   };
 
@@ -53,23 +62,63 @@ export class MapComponent implements AfterViewInit {
     this.mapInitializer();
   }
 
+  openWindows() {
+    for(let i=0;i<this.markers2.length;i++)
+    {
+      this.infoWindows2[i].open(this.markers2[i].getMap(),this.markers2[i]);
+    }
+  }
+
+  closeWindows() {
+    for(let i=0;i<this.markers2.length;i++)
+    {
+      this.infoWindows2[i].close();
+    }
+  }
+
+  showMarkers() {
+    for(let i=0;i<this.markers2.length;i++)
+    {
+      this.markers2[i].setVisible(true);
+    }
+  }
+
+  hideMarkers() {
+    for(let i=0;i<this.markers2.length;i++)
+    {
+      this.markers2[i].setVisible(false);
+      this.infoWindows2[i].close();
+    }
+  }
+
+  showMarker(marker: google.maps.Marker) {
+    marker.setVisible(true);
+  }
+
+  hideMarker(marker: google.maps.Marker) {
+    marker.setVisible(false);
+  }
+
+  agregarMarkerAndWindows() {
+    this.markers.forEach(markerInfo => {
+      const marker = new google.maps.Marker({ ...markerInfo });
+      const infoWindow = new google.maps.InfoWindow({ content: marker.getTitle()});
+      marker.addListener("click", () => {
+        infoWindow.open(marker.getMap(), marker);
+      });
+      marker.setMap(this.map);
+      this.markers2.push(marker);
+      this.infoWindows2.push(infoWindow);
+    });
+  }
+
   mapInitializer(): void {
     //Se inicializa el mapa
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
 
-    //Se agrega el evento click al primer marker
-    this.marker.addListener("click", () => {
-      const infoWindow = new google.maps.InfoWindow({
-        content: this.marker.getTitle()
-      });
-      infoWindow.open(this.marker.getMap(), this.marker);
-    });
+    this.markers.push(this.marker);
 
-    //Se agrega el primer marker al mapa
-    this.marker.setMap(this.map);
-
-    //Se agregan los otros markers
-    this.loadAllMarkers();
+    this.agregarMarkerAndWindows();
   }
 
   addMarker() {
@@ -79,8 +128,8 @@ export class MapComponent implements AfterViewInit {
         lng: this.position.lng + ((Math.random() - 0.5) * 2) / 10,
       },
       label: {
-        color: 'red',
-        text: 'Marker label ' + (this.markers.length + 1),
+        //color: 'red',
+        //text: 'Marker label ' + (this.markers.length + 1),
       },
       title: 'Marker title ' + (this.markers.length + 1),
       info: 'Marker info ' + (this.markers.length + 1),
@@ -89,7 +138,7 @@ export class MapComponent implements AfterViewInit {
       },
     });
 
-    this.loadAllMarkers();
+    this.agregarMarkerAndWindows();
   }  
 
 
