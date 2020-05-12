@@ -1,39 +1,6 @@
-<p>map works!</p>
-<!--
-<google-map
-height="500px"
-  width="100%"
-  [zoom]="zoom"
-  [center]="position"
-  [options]="options"
-  (mapClick)="click($event)"
-  (mapRightclick)="rightclick($event)"
-  (mapDblclick)="dblclick($event)"
-  >
-
-
-  <map-marker
-    #markerElem
-    *ngFor="let marker of markers"
-    [position]="marker.position"
-    [label]="marker.label"
-    [title]="marker.title"
-    [options]="marker.options"
-    (mapClick)="openInfo(markerElem, marker.info)"
-  >
-  </map-marker>
-
-  <map-info-window>{{ infoContent }}</map-info-window>
-
-</google-map>
-
-<button (click)="logCenter()">Log center</button>
-<button (click)="addMarker()">Add marker</button>
--->
-
 <div #mapContainer id="map" style="height: 500px; width: 100%;"></div>
-<button class="btn btn-info" (click)="addMarker()">Add marker</button>
 
+<button class="btn btn-info" (click)="addMarker()">Add marker</button>
 <button class="btn btn-info" (click)="openWindows()">Open Windows</button>
 <button class="btn btn-info" (click)="closeWindows()">Close Windows</button>
 <button class="btn btn-info" (click)="showMarkers()">Show Markers</button>

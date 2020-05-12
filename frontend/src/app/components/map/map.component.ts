@@ -12,31 +12,16 @@ export class MapComponent implements AfterViewInit {
   @ViewChild("mapContainer", { static: false }) gmap: ElementRef;
 
   map: google.maps.Map;
-  lat = 40.73061;
-  lng = -73.935242;
+  lat = -34.6231768;
+  lng = -58.4476364;
 
   position = {lat: this.lat, lng: this.lng};
 
   markers = [];
-  infoWindows =[];
-
-  markers2 = [];
-  infoWindows2 =[];
-
-  /*
-  markers = [
-    {
-      position: new google.maps.LatLng(40.73061, 73.935242),
-      map: this.map,
-      title: "Marker 1"
-    },
-    {
-      position: new google.maps.LatLng(32.06485, 34.763226),
-      map: this.map,
-      title: "Marker 2"
-    }
-  ];*/
-
+  
+  markersInfo = [];
+  
+  infoWindows = [];
 
   //Coordinates to set the center of the map
   coordinates = new google.maps.LatLng(this.lat, this.lng);
@@ -48,7 +33,7 @@ export class MapComponent implements AfterViewInit {
     disableDoubleClickZoom: true,
     maxZoom: 15,
     minZoom: 8,
-    zoom: 8
+    zoom: 15
   };
 
   //Default Marker
@@ -63,31 +48,32 @@ export class MapComponent implements AfterViewInit {
   }
 
   openWindows() {
-    for(let i=0;i<this.markers2.length;i++)
+    for(let i=0;i<this.markers.length;i++)
     {
-      this.infoWindows2[i].open(this.markers2[i].getMap(),this.markers2[i]);
+      if(this.markers[i].getVisible())
+        this.infoWindows[i].open(this.markers[i].getMap(),this.markers[i]);
     }
   }
 
   closeWindows() {
-    for(let i=0;i<this.markers2.length;i++)
+    for(let i=0;i<this.markers.length;i++)
     {
-      this.infoWindows2[i].close();
+      this.infoWindows[i].close();
     }
   }
 
   showMarkers() {
-    for(let i=0;i<this.markers2.length;i++)
+    for(let i=0;i<this.markers.length;i++)
     {
-      this.markers2[i].setVisible(true);
+      this.markers[i].setVisible(true);
     }
   }
 
   hideMarkers() {
-    for(let i=0;i<this.markers2.length;i++)
+    for(let i=0;i<this.markers.length;i++)
     {
-      this.markers2[i].setVisible(false);
-      this.infoWindows2[i].close();
+      this.markers[i].setVisible(false);
+      this.infoWindows[i].close();
     }
   }
 
@@ -100,15 +86,15 @@ export class MapComponent implements AfterViewInit {
   }
 
   agregarMarkerAndWindows() {
-    this.markers.forEach(markerInfo => {
+    this.markersInfo.forEach(markerInfo => {
       const marker = new google.maps.Marker({ ...markerInfo });
       const infoWindow = new google.maps.InfoWindow({ content: marker.getTitle()});
       marker.addListener("click", () => {
         infoWindow.open(marker.getMap(), marker);
       });
       marker.setMap(this.map);
-      this.markers2.push(marker);
-      this.infoWindows2.push(infoWindow);
+      this.markers.push(marker);
+      this.infoWindows.push(infoWindow);
     });
   }
 
@@ -116,23 +102,23 @@ export class MapComponent implements AfterViewInit {
     //Se inicializa el mapa
     this.map = new google.maps.Map(this.gmap.nativeElement, this.mapOptions);
 
-    this.markers.push(this.marker);
+    this.markersInfo.push(this.marker);
 
     this.agregarMarkerAndWindows();
   }
 
   addMarker() {
-    this.markers.push({
+    this.markersInfo.push({
       position: {
         lat: this.position.lat + ((Math.random() - 0.5) * 2) / 10,
         lng: this.position.lng + ((Math.random() - 0.5) * 2) / 10,
       },
       label: {
-        //color: 'red',
-        //text: 'Marker label ' + (this.markers.length + 1),
+        color: 'black',
+        text: ' '
       },
-      title: 'Marker title ' + (this.markers.length + 1),
-      info: 'Marker info ' + (this.markers.length + 1),
+      title: 'Marker title ' + (this.markersInfo.length + 1),
+      info: 'Marker info ' + (this.markersInfo.length + 1),
       options: {
         //animation: google.maps.Animation.BOUNCE,
       },
@@ -140,32 +126,6 @@ export class MapComponent implements AfterViewInit {
 
     this.agregarMarkerAndWindows();
   }  
-
-
-
-  loadAllMarkers(): void {
-    this.markers.forEach(markerInfo => {
-      //Creating a new marker object
-      const marker = new google.maps.Marker({
-        ...markerInfo
-      });
-
-      //creating a new info window with markers info
-      const infoWindow = new google.maps.InfoWindow({
-        content: marker.getTitle()
-      });
-
-      //Add click event to open info window on marker
-      marker.addListener("click", () => {
-        infoWindow.open(marker.getMap(), marker);
-      });
-
-      infoWindow.open(marker.getMap(), marker);
-
-      //Adding marker to google map
-      marker.setMap(this.map);
-    });
-  }
 }
 
 
