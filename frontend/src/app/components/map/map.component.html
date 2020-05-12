@@ -1,37 +1,4 @@
 <p>map works!</p>
-<!--
-<google-map 
-    #mapa
-    width=100% 
-    height=600 
-    [center]="position"
-    [zoom]="zoom"
-    [options]="options"
-    
-    (mapDblclick)="dobleClick();"
-    
-    (mapRightclick)="rightClick();">
-    <!--
-
-    <map-marker
-    [position]="position"
-    [label]="label"
-    [title]="title"></map-marker>
-    (mapClick)="openInfo(markerElem, info)"
-    </map-marker>
-    
-    <map-marker
-    #markerElement
-    *ngFor="let marker of markers"
-    [position]="marker.position"
-    [label]="marker.label"
-    [title]="marker.title"
-    [options]="marker.options"></map-marker>
-    <!--(mapClick)="openInfo(markerElem, marker.info)"
-
-    <button class="btn btn-info" (click)="addMarker()">Add marker</button>
-    
-</google-map>-->
 
 <google-map
 height="500px"
@@ -39,7 +6,10 @@ height="500px"
   [zoom]="zoom"
   [center]="position"
   [options]="options"
-  (mapClick)="click($event)">
+  (mapClick)="click($event)"
+  (mapRightclick)="rightclick($event)"
+  (mapDblclick)="dblclick($event)"
+  >
 
 
   <map-marker
