@@ -1,7 +1,39 @@
-<div class="container">
-    <a href="/usuarios" class="btn btn-info">ir a Usuarios</a>
+<div class="container row">
+    <!--<a href="/usuarios" class="btn btn-info">ir a Usuarios</a>-->
     
-    <div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="propuestas">Argentina</a></li>
+            <li class="breadcrumb-item"><a href="#">Ciudad Autónoma de Buenos Aires</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Caballito</li>
+            </ol>
+        </nav>
+    </div>
+
+
+        <div class="col-md-3 rounded">
+
+            <h4>Filtros</h4>
+
+            <div>
+                <h5>Ubicación</h5>
+                <ul>
+                    <li>Mendoza (34)</li>
+                    <li>Buenos Aires (129)</li>
+                </ul>
+            </div>
+            <hr>
+            <div>
+                <h5>Ubicación</h5>
+                <ul>
+                    <li>Mendoza (34)</li>
+                    <li>Buenos Aires (129)</li>
+                </ul>
+            </div>
+        </div>
+
+    <div class="col-md-9 row rounded" style="background-color: darkgray;">
         <div class="col-sm-7" *ngIf="filtroUsuario">
             <!--<h2>Propuestas<button (click)="toggleFiltroUsuario()" class="btn btn-info">Ver todas</button></h2>-->
             <div class="card">
@@ -94,10 +126,13 @@
                                 <input type="file" ng-file-model="files" multiple (change)="setImagenes($event)" class="form-control" name="imagen"/>
                             </div>
 
-                            <div class="col-sm-12 row card-group">
-                                <div class="col-sm-4"  *ngFor="let imagen of propuestaSeleccionada.imagenes" style="height: width;">
-                                    <div class="card">
-                                        <img class="card-img img-responsive" src='{{URL_D_IMGS + imagen}}' alt="Card image">
+                            <div class="col-sm-12 row card-deck">
+                                <div class="col-sm-4 border-secondary"  *ngFor="let imagen of propuestaSeleccionada.imagenes">
+                                    <div class="card bg-light mb-3">
+                                        <img class="card-img img-responsive rounded" src='{{URL_D_IMGS + imagen}}' alt="Card image cap">
+
+                                        <h5 class="card-title">Card title</h5>
+                                        <h5 class="card-text">Card text</h5>
                                     </div>
                                 </div>
                                 <!--
