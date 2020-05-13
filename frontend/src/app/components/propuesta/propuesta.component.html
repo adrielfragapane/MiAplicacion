@@ -177,19 +177,11 @@
             <div class="card p-0">
                 <div id="{{ 'carousel_' + i }}" class="carousel slide" data-ride="carousel" style="height: 150px;">
                     <ol class="carousel-indicators">
-                        <li data-target="#{{ 'carousel_' + i }}" data-slide-to="0"></li>
-                        <li data-target="#{{ 'carousel_' + i }}" data-slide-to="1"></li>
-                        <li data-target="#{{ 'carousel_' + i }}" data-slide-to="2"></li>
+                        <li *ngFor="let imagen of propuesta.imagenes, let j = index" [attr.data-target]="'#' + 'carousel_' + i " data-slide-to="j"></li> 
                     </ol>
-                    <div class="carousel-inner bg-dark d-flex align-items-center" style="height: 150px;" >
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="http://localhost:3000/estatico/imgs/1.jpg" alt="First slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="http://localhost:3000/estatico/imgs/2.jpg" alt="Second slide">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="http://localhost:3000/estatico/imgs/3.jpg" alt="Third slide">
+                    <div class="carousel-inner bg-dark d-flex align-items-center justify-content-stretch " style="height: 150px;" >
+                        <div class="carousel-item" [ngClass]="{ active : j == 0}" *ngFor="let imagen of propuesta.imagenes, let j = index">
+                            <img class="d-block w-100" src='{{URL_D_IMGS + imagen}}' alt="{{'Imagen ' + j}}">
                         </div>
                     </div>
                 </div>
@@ -208,6 +200,12 @@
                 </div>
                 <div class="card-footer">
                 <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+                <div class="card-footer">
+                    <div class="col-md-6 d-flex justify-content-around rounded">
+                        <h5> {{propuesta.votos.length}} <a  [routerLink]="" (click)="votar(propuesta)"><i class="fa fa-thumbs-up text-success"></i></a></h5>
+                        <h5> 4 <i class="fa fa-thumbs-down text-danger"></i></h5>
+                    </div>
                 </div>
             </div>
         </div>
@@ -235,7 +233,7 @@
                         <p class="mb-1">{{propuesta.usuario.apellido}}</p>
                     </div>
                     <div class="col-md-2 d-flex justify-content-around rounded">
-                        <h5> {{propuesta.votos.length}} <i class="fa fa-thumbs-up text-success"></i></h5>
+                        <h5> {{propuesta.votos.length}}</h5>
                         <h5> 4 <i class="fa fa-thumbs-down text-danger"></i></h5>
                     </div>
                 </div>
