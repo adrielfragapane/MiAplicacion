@@ -211,32 +211,10 @@
         </div>
     </div>
 
+    <app-map #mapa></app-map>
 
+    <button class="btn btn-info" (click)="mapa.addMarker()">Add marker</button>
 
+    <button class="btn btn-info" (click)="mapa.setMarkersInfo()">Refresh</button>
 
-
-
-
-    <div class="col-md-9">
-        <div *ngFor="let propuesta of propuestas">
-            <div class="conainer row justify-content-md-center mt-1">
-                <div class="jumbotron p-3 row col-md-12">               
-                    <div class="col-md-10">
-                        <h3>{{propuesta.nombre}}</h3>
-                        <p>Ciudad Autónoma de Buenos Aires</p>
-                        <hr class="my-4">
-                        <p class="lead">{{propuesta.descripcion}}</p>
-                    </div>               
-                    <div class="col-md-2 text-center">
-                        <img class="img-thumbnail" src="http://localhost:3000/estatico/imgs/CV.jpeg" alt="Usuario" style="width: 80px; height: 80px;">
-                        <p class="mb-1">{{propuesta.usuario.nombre}}</p>
-                        <p class="mb-1">{{propuesta.usuario.apellido}}</p>
-                    </div>
-                    <div class="col-md-2 d-flex justify-content-around rounded">
-                        <h5> {{propuesta.votos.length}}</h5>
-                        <h5> 4 <i class="fa fa-thumbs-down text-danger"></i></h5>
-                    </div>
-                </div>
-        </div>    
-    </div>
-</div>
+    <button class="btn btn-info" (click)="mapa.addMarker()">Add marker</button>

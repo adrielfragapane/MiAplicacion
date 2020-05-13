@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Propuesta } from 'src/app/models/propuesta.model';
 import { PropuestaService } from 'src/app/services/propuesta.service';
 import { Router } from '@angular/router';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-propuesta',
   templateUrl: './propuesta.component.html',
   styleUrls: ['./propuesta.component.css']
 })
-export class PropuestaComponent implements OnInit {
+export class PropuestaComponent implements OnInit, AfterViewInit {
 
   propuestas: Propuesta[];
 
@@ -35,6 +36,9 @@ export class PropuestaComponent implements OnInit {
   URL_E_IMGS: String = this.URL_E + "imgs/";
 
   constructor(private propuestaService: PropuestaService, private router: Router) { }
+
+  ngAfterViewInit(): void {
+  }
 
   ngOnInit(): void {
 
