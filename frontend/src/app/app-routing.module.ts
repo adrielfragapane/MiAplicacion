@@ -4,12 +4,14 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { PropuestaComponent } from './components/propuesta/propuesta.component';
 import { DetallePropuestaComponent } from './components/detalle-propuesta/detalle-propuesta.component';
 import { MapComponent } from './components/map/map.component';
+import { PropuestaNuevaComponent } from './components/propuestaNueva/propuestaNueva.component';
 
 
 const routes: Routes = [
   {path: 'usuarios', component: UsuarioComponent},
   {path: 'propuestas', component: PropuestaComponent},
   {path: 'propuesta', component: DetallePropuestaComponent},
+  {path: 'propuestaNueva', component: PropuestaNuevaComponent},
   {path: 'mapa', component: MapComponent}
 ];
 
