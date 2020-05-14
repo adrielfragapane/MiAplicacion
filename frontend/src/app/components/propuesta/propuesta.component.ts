@@ -11,6 +11,8 @@ import { MapComponent } from '../map/map.component';
 })
 export class PropuestaComponent implements OnInit, AfterViewInit {
 
+  @ViewChild(MapComponent) mapa: MapComponent;
+
   propuestas: Propuesta[];
 
   propuestasUsuario: Propuesta[];
@@ -162,4 +164,21 @@ export class PropuestaComponent implements OnInit, AfterViewInit {
   setImagenes(event) {
     this.imagenesSeleccionadas = event.target.files;
   }
+
+  lat = -34.6231768;
+  lng = -58.4476364;
+
+  refrescarMapa() {
+    this.getPropuestas();
+    this.propuestas.forEach( (propuesta) => {
+      if(propuesta.ubicacion) {
+              if(propuesta.ubicacion.latitud!=0) {
+        this.mapa.addMarkerInfo(<number>propuesta.ubicacion.latitud,<number>propuesta.ubicacion.longitud);
+        }
+      }
+    });
+    this.mapa.addMarkerInfo(this.lat,this.lng);
+    this.mapa.addMarkerAndWindows();
+  }
+  
 }

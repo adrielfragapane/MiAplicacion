@@ -6,13 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 
-
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { PropuestaComponent } from './components/propuesta/propuesta.component';
 import { DetallePropuestaComponent } from './components/detalle-propuesta/detalle-propuesta.component';
 import { PropuestaNuevaComponent } from './components/propuestaNueva/propuestaNueva.component';
 import { MapComponent } from './components/map/map.component';
+import { AutocompletarPlacesComponent } from './components/autocompletar/autocompletarPlaces.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { MapComponent } from './components/map/map.component';
     PropuestaComponent,
     DetallePropuestaComponent,
     PropuestaNuevaComponent,
-    MapComponent
+    MapComponent,
+    AutocompletarPlacesComponent
   ],
   imports: [
     BrowserModule,
