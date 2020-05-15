@@ -8,7 +8,7 @@ mongoose.set('useUnifiedTopology', true);
 const URI = 'mongodb://localhost/MiAplicacion';
 
 mongoose.connect(URI)
-    .then(db => console.log('Conectado a base de datos "MiAplicacion"'))
+    .then(db => console.log(`Conectado a base de datos ${db.connection.db.databaseName}`))
     .catch(err => console.log(err));
 
 module.exports = mongoose;
