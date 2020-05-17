@@ -15,9 +15,9 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SocialLoginComponent } from './components/social-login/social-login.component';
 
 const routes: Routes = [
-  { path: 'facebook', component: SocialLoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signin', component: SigninComponent },
+  //{ path: 'facebook', component: SocialLoginComponent },
+  //{ path: 'login', component: LoginComponent },
+  //{ path: 'signin', component: SigninComponent },
   { path: '', canActivate: [AuthGuard], children: [
 
     { path: 'home', component: PropuestaNuevaComponent },
