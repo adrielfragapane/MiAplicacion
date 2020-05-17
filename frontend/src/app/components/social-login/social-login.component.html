@@ -1,0 +1,14 @@
+<p>social-login works!</p>
+
+
+
+<div *ngIf="loggedIn">
+    <img src="{{ user.photoUrl }}">
+    <div>
+      <h4>{{ user.name }}</h4>
+      <p>{{ user.email }}</p>
+    </div>
+</div>
+<button class="btn btn-info" (click)="signInWithFB()">Facebook</button>
+<button class="btn btn-info" (click)="signOut()">Cerrar Sesion</button>
+<button class="btn btn-info" (click)="getUser()">GET USER</button>

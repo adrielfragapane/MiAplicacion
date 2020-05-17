@@ -1,0 +1,140 @@
+<nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="propuesta">Propuesta</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="usuarios">Usuarios <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="signin">Registrar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="propuestas">Propuestas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="propuestaNueva">Propuesta Nueva</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="mapa">Mapa</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Menú
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="usuarios">Usuarios</a>
+              <a class="dropdown-item" href="propuestas">Propuestas</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li>
+        </ul>
+        
+        <div *ngIf="loggedIn==true" class="d-flex align-items-center">
+          <img src="{{ user.photoUrl }}" style="width: 40px; height: 40px;" class="rounded">
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{user.firstName}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" role="button" (click)=getUser()>Perfil</a>
+              <a class="dropdown-item" href="#">Configuración</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" role="button" (click)=signOut()>Cerrar sesión</a>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="loggedIn==false" class="d-flex align-items-center">
+          <a class="nav-link" href="#" role="button" data-toggle="modal" data-target="#exampleModal" aria-haspopup="true" aria-expanded="false">
+            Registrarse
+          </a>
+        </div>
+        <!--<form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>-->
+      </div>
+    </div>  
+  </nav>
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Iniciar sesión</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div *ngIf="true">
+          <div class="modal-body row justify-content-center">
+            <button class="btn mt-2 col-10 social email" data-dismiss="modal">
+              <div class="float-left text-center" style="width: 10%;"><i class="fa social fa-envelope"></i></div>
+              <div>Registrarse con un correo electrónico</div>
+            </button>
+            <button class="btn mt-2 col-10 social facebook" data-dismiss="modal" (click)="signInWithFacebook()">
+              <div class="float-left text-center" style="width: 10%;"><i class="fa social fa-facebook"></i></div>
+              <div>Registrarse con Facebook</div>
+            </button>
+            <button class="btn mt-2 col-10 social google" data-dismiss="modal">
+              <div class="float-left text-center" style="width: 10%;"><i class="fa social fa-google"></i></div>
+              <div>Registrarse con Google</div>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="true">
+          <div class="modal-body row justify-content-center">
+            <input type="email" class="form-control col-10 mt-2" name="email"
+            placeholder="Correo electrónico">
+            <input type="text" class="form-control col-10 mt-2" name="password"
+            placeholder="Contraseña">
+            <button class="btn btn-success form-control col-10 mt-2">Iniciar sesión</button>
+          </div>
+        </div>
+
+        <div *ngIf="true">
+          <div class="modal-body row justify-content-center">
+            <input type="text" class="form-control col-10 mt-2" name="name"
+            placeholder="Nombre">
+            <input type="text" class="form-control col-10 mt-2" name="lastName"
+            placeholder="Apellido">
+            <input type="date" class="form-control col-10 mt-2" name="birthday"
+            placeholder="Fecha de nacimiento">
+            <input type="email" class="form-control col-10 mt-2" name="email"
+            placeholder="Correo electrónico">
+            <input type="text" class="form-control col-10 mt-2" name="password"
+            placeholder="Contraseña">
+            <button class="btn btn-success form-control col-10 mt-2">Registrarse</button>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

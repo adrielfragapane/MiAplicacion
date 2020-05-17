@@ -1,0 +1,25 @@
+<p>login works!</p>
+<!--
+<div class="container">
+    <form method="POST" #LoginForm="ngForm" (ngSubmit)="login()">
+        <label for="usuario">Email</label>
+        <input type="email" name="email" [(ngModel)]="newLogin.email" class="form-control" placeholder="Email">
+        <label for="password"></label>
+        <input type="text" name="password" [(ngModel)]="newLogin.password" class="form-control" placeholder="password">
+        <button class="btn btn-info">ENVIAR</button>
+    </form>
+</div>
+-->
+<div *ngIf="loggedIn">
+    <img src="{{ user.photoUrl }}">
+    <div>
+      <h4>{{ user.name }}</h4>
+      <p>{{ user.email }}</p>
+    </div>
+</div>
+<button class="btn btn-info" (click)="signInWithFacebook()">Facebook</button>
+<button class="btn btn-info" (click)="signOut()">Cerrar Sesion</button>
+<button class="btn btn-info" (click)="getUser()">GET USER</button>
+
+
+<div></div>

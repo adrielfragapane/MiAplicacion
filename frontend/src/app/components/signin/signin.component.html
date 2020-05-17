@@ -1,0 +1,13 @@
+<p>signin works!</p>
+
+<div class="container">
+    <form method="POST" #SigninForm="ngForm" (ngSubmit)="signin(SigninForm)">
+        <label for="name">Email</label>
+        <input type="name" name="name" [(ngModel)]="newSignin.name" class="form-control" placeholder="Nombre">
+        <label for="email">Email</label>
+        <input type="email" name="email" [(ngModel)]="newSignin.email" class="form-control" placeholder="Email">
+        <label for="password"></label>
+        <input type="text" name="password" [(ngModel)]="newSignin.password" class="form-control" placeholder="password">
+        <button class="btn btn-info">ENVIAR</button>
+    </form>
+</div>
