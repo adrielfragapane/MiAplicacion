@@ -13,6 +13,8 @@ const facebookStrategy = require('passport-facebook').Strategy;
 const facebookTokenStrategy = require('passport-facebook-token');
 const cookieParser = require('cookie-parser');
 
+const passport2 = require('./passport');
+
 const User = require('./models/user');
 
 //Configurar puerto
@@ -34,6 +36,10 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+
+
+
 /*
 passport.use(new localStrategy(function (usuario,password,done) { 
     if(usuario === 'Adriel' && password === '1234') {
@@ -55,43 +61,34 @@ passport.use(new localStrategy(function (usuario,password,done) {
   }
 ));*/
 
+
+
+/*
 passport.use(new facebookTokenStrategy({
   clientID: '3534806666534396',
   clientSecret: '43d68a162af24c649dc3c13511fefbdb'
-}, function(accessToken, refreshToken, profile, done) {
-
-  const usuario = new User();
-
-  User.findOne({facebookId: profile.id }, (err,user) => {
-    if(err) {
-      console.log(err); 
-    }
-    else {
-      console.log(user);
-      if(!user) {
-        const newUser = new User();
-        newUser.facebookId = profile.id;
-        newUser.name = profile.displayName;
-        newUser.save()
-        .then( user => console.log(user))
-        .catch( err => console.log(err));
+  },async (accessToken, refreshToken, profile) => {
+    await User.findOne({facebookId: profile.id }, async (err,user) => {
+      if(err) {
+        console.log(err); 
+        done(err,null);
       }
-      console.log(user);
-    }
-  })
-
-
-
-  /*User.findOrCreate({facebookId: profile.id}, (err, user) => {
-    if(err) {
-      return done(error,null);
-    }
-    else {
-      return done(null, user);
-    }
-  });*/
-}
-));
+      else {
+        console.log(profile);
+        console.log(user);
+        if(!user) {
+          const newUser = new User();
+          newUser.facebookId = profile.id;
+          newUser.name = profile.displayName;
+          await newUser.save()
+          .then( user => console.log(user))
+          .catch( err => console.log(err));
+        }
+        done(null,user);
+      }
+    });
+  }
+));*/
 
 /*
 app.get('/auth/facebook',
@@ -104,7 +101,7 @@ app.get('/auth/facebook/callback',
     res.redirect('/');
   });*/
 
-
+/*
 
   passport.serializeUser(function(user, done) {
     done(null, user.id);
@@ -114,7 +111,7 @@ app.get('/auth/facebook/callback',
     User.findById(id, function (err, user) {
       done(err, user);
     });
-  });
+  });*/
 
 /*
 app.get('/sesion', (req,res) => {
