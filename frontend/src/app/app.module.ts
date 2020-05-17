@@ -19,6 +19,8 @@ import { LoginComponent } from './components/login/login.component';
 import { MapComponent } from './components/map/map.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 let config = new AuthServiceConfig([
 
@@ -47,7 +49,9 @@ export function provideConfig() {
     AutocompletarPlacesComponent,
     LoginComponent,
     SigninComponent,
-    SocialLoginComponent
+    SocialLoginComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
