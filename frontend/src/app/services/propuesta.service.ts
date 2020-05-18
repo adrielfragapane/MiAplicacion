@@ -14,7 +14,7 @@ export class PropuestaService {
   readonly URL_API = 'http://localhost:3000/propuestas/'
 
   getPropuestas() {
-      return this.http.get<Propuesta[]>(this.URL_API);
+    return this.http.get<Propuesta[]>(this.URL_API);
   }
 
   postPropuesta(propuesta: Propuesta) {

@@ -37,9 +37,6 @@ app.set('port', process.env.PORT || 3000);
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-
 /*
 passport.use(new localStrategy(function (usuario,password,done) { 
     if(usuario === 'Adriel' && password === '1234') {
@@ -47,71 +44,6 @@ passport.use(new localStrategy(function (usuario,password,done) {
     }
     return done(null,false);
  }));*/
-/*
- passport.use(new facebookStrategy({
-    clientID: '3534806666534396',
-    clientSecret: '43d68a162af24c649dc3c13511fefbdb',
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
-    profileFields: ['id', 'displayName', 'photos', 'email']
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));*/
-
-
-
-/*
-passport.use(new facebookTokenStrategy({
-  clientID: '3534806666534396',
-  clientSecret: '43d68a162af24c649dc3c13511fefbdb'
-  },async (accessToken, refreshToken, profile) => {
-    await User.findOne({facebookId: profile.id }, async (err,user) => {
-      if(err) {
-        console.log(err); 
-        done(err,null);
-      }
-      else {
-        console.log(profile);
-        console.log(user);
-        if(!user) {
-          const newUser = new User();
-          newUser.facebookId = profile.id;
-          newUser.name = profile.displayName;
-          await newUser.save()
-          .then( user => console.log(user))
-          .catch( err => console.log(err));
-        }
-        done(null,user);
-      }
-    });
-  }
-));*/
-
-/*
-app.get('/auth/facebook',
-  passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });*/
-
-/*
-
-  passport.serializeUser(function(user, done) {
-    done(null, user.id);
-  });
-   
-  passport.deserializeUser(function(id, done) {
-    User.findById(id, function (err, user) {
-      done(err, user);
-    });
-  });*/
 
 /*
 app.get('/sesion', (req,res) => {

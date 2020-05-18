@@ -12,7 +12,10 @@ import { DetallePropuestaComponent } from './components/detalle-propuesta/detall
 import { PropuestaNuevaComponent } from './components/propuestaNueva/propuestaNueva.component';
 import { SocialLoginComponent } from './components/social-login/social-login.component';
 import { PropuestaComponent } from './components/propuesta/propuesta.component';
+
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { InterceptorService } from './services/interceptor.service';
+
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { LoginComponent } from './components/login/login.component';
@@ -66,6 +69,11 @@ export function provideConfig() {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
       multi: true
     },
     {

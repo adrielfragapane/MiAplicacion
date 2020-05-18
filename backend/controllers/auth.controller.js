@@ -20,7 +20,6 @@ authController.singin = async (req,res,next) => {
             return res.json({status: 409, message: 'Este email ya se encuentra registrado'});
         } 
         if(err) {
-            console.log(err);
             return res.json({status: 500, message: 'Error en el servidor'});
         }
         const expiresIn = 24*60*60;
@@ -90,11 +89,72 @@ authController.facebookOAuth = (req, res) => {
     }
     req.token = createToken(req.user);
     res.setHeader('x-auth-token', req.token);
-    res.status(200).json({token: req.token});
+    res.status(200).json({token: req.token, expiresIn: 30});
 }
 
 createToken = auth => {
     return jwt.sign({ id: auth.id }, SECRET_KEY, { expiresIn: 30 });
 }
+
+authController.checkToken = (req, res, next) => {
+    let token = req.headers['x-access-token'] || req.headers['authorization'];
+    if (token) {
+        if(token.startsWith('Bearer ')) {
+            token = token.slice(7, token.length);
+            jwt.verify(token, SECRET_KEY, (err, decoded) => {
+                if (err) {
+                    console.log('no es valido');
+                    return res.status(401).json({ success: false, message: 'Token is not valid' });
+                } else {
+                  req.decoded = decoded;
+                  next();
+                }
+            });
+        }
+    }
+    else {
+        console.log('sin permiso');
+        return res.status(401).json({  success: false,
+          message: 'Auth token is not supplied'
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+/*
+
+    if (token && token.startsWith('Bearer ')) {
+        token = token.slice(7, token.length);
+        if (token) {
+
+
+
+
+            jwt.verify(token, SECRET_KEY, (err, decoded) => {
+                if (err) {
+                  return res.status(401).json({ success: false, message: 'Token is not valid' });
+                } else {
+                  req.decoded = decoded;
+                  next();
+                }
+              });
+
+
+
+        }
+        else {
+            return res.json({  success: false,
+              message: 'Auth token is not supplied'
+            });
+        }
+    }
+};*/
 
 module.exports = authController;

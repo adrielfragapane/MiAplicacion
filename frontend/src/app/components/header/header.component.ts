@@ -16,6 +16,8 @@ export class HeaderComponent implements OnInit {
 
   loggedIn: boolean;
 
+  logged : boolean;
+
   constructor(private authLocalService: AuthLocalService ,private authService: AuthService) { }
 
   ngOnInit() {
@@ -23,6 +25,8 @@ export class HeaderComponent implements OnInit {
       this.user = user;
       this.loggedIn = (user != null);
     });
+
+    //this.checkToken()
   }
 
 
@@ -35,16 +39,14 @@ export class HeaderComponent implements OnInit {
   signInWithFacebook(): void {
     if(!this.user) {
       this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)
-      /*.then( user => {
-        console.log(user);
-        return user;
-      })*/
       .then( user => {
-        console.log('Usuario devuelto por Facebook');
-        console.log(user);
+        //console.log('Usuario devuelto por Facebook');
+        //console.log(user);
         return this.authLocalService.sendTokenFacebook(user.authToken).toPromise();})
       .then( res => {
-          console.log(res['token']);
+        console.log(res);
+          //console.log(res['token']);
+          //console.log(res['expiresIn']);
           localStorage.setItem('token',res['token']);
       })
       .catch(err => {
@@ -55,9 +57,18 @@ export class HeaderComponent implements OnInit {
 
   signOut(): void {
     this.authService.signOut();
-
   }
 
+/*
+  checkToken() {
+    this.authLocalService.checkToken()
+    .subscribe( res => {
+      //console.log(res);
+      this.logged = res['success']
+    });
+  }*/
+    
+/*
   getUser() {
     this.authService.authState
     .subscribe ( user => {
@@ -70,5 +81,5 @@ export class HeaderComponent implements OnInit {
       //this.loggedIn = (user != null);
       //return this.http.post(`http://localhost:8000/users/auth/facebook`, {access_token: result.authResponse.accessToken})
     });
-  }
+  }*/
 }

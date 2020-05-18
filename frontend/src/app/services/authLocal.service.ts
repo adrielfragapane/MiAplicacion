@@ -65,10 +65,14 @@ export class AuthLocalService {
   signOut(): void {
     this.authService.signOut();
   }
-
+/*
   getUser() {
     return this.authService.authState;
   }
+
+  checkToken() {
+    return this.http.get(`http://localhost:3000/`);
+  }*/
 
 
   sendTokenFacebook(authToken: string) {

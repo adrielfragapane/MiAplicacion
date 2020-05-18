@@ -58,7 +58,7 @@ export class PropuestaComponent implements OnInit, AfterViewInit {
 
   getPropuestas() {
     this.propuestaService.getPropuestas()
-    .subscribe(res => {
+    .subscribe( res => {
       this.propuestas = res as Propuesta[]; 
     });
   }

@@ -11,9 +11,6 @@
             <a class="nav-link" href="usuarios">Usuarios <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="signin">Registrar</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="login">Login</a>
           </li>
           <li class="nav-item">
@@ -48,7 +45,7 @@
               {{user.firstName}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" role="button" (click)=getUser()>Perfil</a>
+              <a class="dropdown-item" role="button">Perfil</a>
               <a class="dropdown-item" href="#">Configuración</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" role="button" (click)=signOut()>Cerrar sesión</a>
