@@ -8,9 +8,10 @@ import { PropuestaNuevaComponent } from './components/propuestaNueva/propuestaNu
 import { LoginComponent } from './components/login/login.component';
 
 import { AuthGuard } from "./guards/auth.guard";
+import { ObservablesComponent } from './components/observables/observables.component';
 
 const routes: Routes = [
-  
+  { path: 'observable', component: ObservablesComponent},
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: PropuestaNuevaComponent },  

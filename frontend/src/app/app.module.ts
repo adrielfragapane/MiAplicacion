@@ -24,6 +24,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ObservablesComponent } from './components/observables/observables.component';
 
 let config = new AuthServiceConfig([
 
@@ -54,7 +55,8 @@ export function provideConfig() {
     SigninComponent,
     SocialLoginComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ObservablesComponent
   ],
   imports: [
     BrowserModule,
