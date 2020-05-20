@@ -9,9 +9,11 @@ import { LoginComponent } from './components/login/login.component';
 
 import { AuthGuard } from "./guards/auth.guard";
 import { ObservablesComponent } from './components/observables/observables.component';
+import { PagoComponent } from './components/pago/pago.component';
 
 const routes: Routes = [
   { path: 'observable', component: ObservablesComponent},
+  { path: 'pago', component: PagoComponent},
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: PropuestaNuevaComponent },  

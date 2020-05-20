@@ -25,6 +25,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ObservablesComponent } from './components/observables/observables.component';
+import { PagoComponent } from './components/pago/pago.component';
 
 let config = new AuthServiceConfig([
 
@@ -56,7 +57,8 @@ export function provideConfig() {
     SocialLoginComponent,
     HeaderComponent,
     FooterComponent,
-    ObservablesComponent
+    ObservablesComponent,
+    PagoComponent
   ],
   imports: [
     BrowserModule,
